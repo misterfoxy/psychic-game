@@ -1,3 +1,15 @@
+console.log(`%c ________________________________________
+< mooooooooooooooooooooooooooooooooooooo >
+ ----------------------------------------
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+|| ||`);
+
+console.log("Look what we have here! A super sly developer who knows they can find the answer by checking out dev tools!");
+
+
 var letters=['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 'o','p','q','r','s','t','u','v','w','x','y','z'];
 
@@ -6,6 +18,7 @@ var losses = 0;
 var guessedLetters=[];
 var isGuessed = false;
 var answer = chooseLetter(letters);
+console.log("The answer is: " + answer)
 
 function chooseLetter(letters){
   return letters[Math.floor(Math.random() * letters.length)];
@@ -62,26 +75,27 @@ function checkGuessed(guess){
 
 document.onkeyup = function(event) {
 
+
   var guess = String.fromCharCode(event.keyCode).toLowerCase();
 
   isGuessed = checkGuessed(guess);
 
-  console.log(isGuessed);
   if(guess === answer){
     wins++;
     document.getElementById('wins').innerHTML = wins;
     resetGuessedLetters();
     resetTimer();
     answer = chooseLetter(letters);
+    console.log("The new answer is: " + answer);
   }
 
   else if (guess !== answer && isGuessed === false) {
       guessedLetters.push(guess);
       document.getElementById('guessedLetters').innerHTML = guessedLetters;
-
+      updateTimer();
     }
 
-  updateTimer();
+
   checkTimer();
 
 };
