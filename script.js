@@ -4,6 +4,7 @@ var letters=['a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 var wins = 0;
 var losses = 0;
 var guessedLetters=[];
+var isGuessed = false;
 
 function chooseLetter(letters){
   return letters[Math.floor(Math.random() * letters.length)];
@@ -12,8 +13,11 @@ function chooseLetter(letters){
 function updateTimer(){
   var guessesLeft = document.getElementById('guessesLeft');
   var number = guessesLeft.innerHTML;
-  number--;
-  guessesLeft.innerHTML = number;
+
+  if(isGuessed == false){
+    number--;
+    guessesLeft.innerHTML = number;
+  }
 }
 
 function resetTimer(){
@@ -21,7 +25,6 @@ function resetTimer(){
   var number = guessesLeft.innerHTML;
   number = 10;
   guessesLeft.innerHTML = number;
-
 }
 
 function checkTimer(){
@@ -44,20 +47,34 @@ function resetGuessedLetters(){
   document.getElementById('guessedLetters').innerHTML = guessedLetters;
 }
 
+function checkGuessed(guess){
+  for (var i = 0; i < guessedLetters.length; i++){
+    if(guess === guessedLetters[i]){
+      isGuessed = true;
+    } else{
+      isGuessed = false;
+    }
+  }
+  return isGuessed;
+}
+
 
 document.onkeyup = function(event) {
+  checkTimer();
 
-  updateTimer();
-
+  isGuessed = false;
   var answer = chooseLetter(letters);
   var guess = String.fromCharCode(event.keyCode).toLowerCase();
 
-    if (guess != answer){
-      guessedLetters.push(" " + guess);
+  isGuessed = checkGuessed(guess);
+
+  if (guess != answer && isGuessed == false){
+      guessedLetters.push(guess);
       document.getElementById('guessedLetters').innerHTML = guessedLetters;
+      
     }
 
-  checkTimer();
+  updateTimer();
 
   if(guess === answer){
     wins++;
