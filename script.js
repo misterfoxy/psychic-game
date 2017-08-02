@@ -52,7 +52,7 @@ function checkGuessed(guess){
   for (var i = 0; i < guessedLetters.length; i++){
     if(guess === guessedLetters[i]){
       isGuessed = true;
-    } else{
+    } else {
       isGuessed = false;
     }
   }
@@ -61,21 +61,10 @@ function checkGuessed(guess){
 
 
 document.onkeyup = function(event) {
-  checkTimer();
-
-  isGuessed = false;
 
   var guess = String.fromCharCode(event.keyCode).toLowerCase();
 
   isGuessed = checkGuessed(guess);
-
-  if (guess != answer && isGuessed == false){
-      guessedLetters.push(guess);
-      document.getElementById('guessedLetters').innerHTML = guessedLetters;
-
-    }
-
-  updateTimer();
 
   if(guess === answer){
     wins++;
@@ -83,6 +72,16 @@ document.onkeyup = function(event) {
     resetGuessedLetters();
     resetTimer();
     answer = chooseLetter(letters);
+}
 
-  }
+  else if (guess != answer && isGuessed == false){
+      guessedLetters.push(guess);
+      document.getElementById('guessedLetters').innerHTML = guessedLetters;
+    }
+
+  updateTimer();
+  checkTimer();
+
+
+
 };
