@@ -5,6 +5,7 @@ var wins = 0;
 var losses = 0;
 var guessedLetters=[];
 var isGuessed = false;
+var answer = chooseLetter(letters);
 
 function chooseLetter(letters){
   return letters[Math.floor(Math.random() * letters.length)];
@@ -63,7 +64,7 @@ document.onkeyup = function(event) {
   checkTimer();
 
   isGuessed = false;
-  var answer = chooseLetter(letters);
+
   var guess = String.fromCharCode(event.keyCode).toLowerCase();
 
   isGuessed = checkGuessed(guess);
@@ -71,7 +72,7 @@ document.onkeyup = function(event) {
   if (guess != answer && isGuessed == false){
       guessedLetters.push(guess);
       document.getElementById('guessedLetters').innerHTML = guessedLetters;
-      
+
     }
 
   updateTimer();
@@ -81,5 +82,7 @@ document.onkeyup = function(event) {
     document.getElementById('wins').innerHTML = wins;
     resetGuessedLetters();
     resetTimer();
+    answer = chooseLetter(letters);
+
   }
 };
