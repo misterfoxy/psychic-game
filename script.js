@@ -66,22 +66,22 @@ document.onkeyup = function(event) {
 
   isGuessed = checkGuessed(guess);
 
+  console.log(isGuessed);
   if(guess === answer){
     wins++;
     document.getElementById('wins').innerHTML = wins;
     resetGuessedLetters();
     resetTimer();
     answer = chooseLetter(letters);
-}
+  }
 
-  else if (guess != answer && isGuessed == false){
+  else if (guess !== answer && isGuessed === false) {
       guessedLetters.push(guess);
       document.getElementById('guessedLetters').innerHTML = guessedLetters;
+
     }
 
   updateTimer();
   checkTimer();
-
-
 
 };
